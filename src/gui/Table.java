@@ -124,6 +124,11 @@ public class Table extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Remove Table");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,6 +172,25 @@ public class Table extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // remove table number
+        try {
+            int rowIndex = jTable1.getSelectedRow();
+            if (rowIndex == -1) {
+                JOptionPane.showMessageDialog(null, "Please select any row!");
+            }
+            else {
+                String n = (String) jTable1.getValueAt(rowIndex, 1);
+                db.DbConnect.st.executeUpdate("delete from table_number where table_name='" + n + "'");
+                getEntries();
+                JOptionPane.showMessageDialog(null, "Success!");
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
