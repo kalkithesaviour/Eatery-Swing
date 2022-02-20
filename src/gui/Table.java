@@ -38,7 +38,8 @@ public class Table extends javax.swing.JFrame {
                 r.add(n);
                 dtm.addRow(r);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
