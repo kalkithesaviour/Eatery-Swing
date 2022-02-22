@@ -203,6 +203,11 @@ public class Home extends javax.swing.JFrame {
         jLabel8.setText("Phone:");
 
         jButton3.setText("Save Bill");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -470,6 +475,41 @@ public class Home extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_tables2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            String name = n.getText();
+            String a = amt.getText();
+            if(!a.equals("0") && !name.equals("")) {
+                String tnOfBill = (String) tables2.getSelectedItem();
+                javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+                int rc = dtm.getRowCount();
+                String dishes = "";
+                for (int x = rc - 1; x >= 0; x--) {
+                    String t = (String) jTable1.getValueAt(x, 0);
+                    if (t.equalsIgnoreCase(tnOfBill)) {
+                        String d = (String) jTable1.getValueAt(x, 1);
+                        int p = (int) jTable1.getValueAt(x, 2);
+                        dishes += d + "(" + p + ") ";
+                        dtm.removeRow(x);
+                    }
+                }
+                int amount = Integer.parseInt(a);
+                String phone = p.getText();
+                db.DbConnect.st.executeUpdate("insert into table_bills (name, phone, amount, bill_date, dishes) values('" + name + "', '" + phone + "', " + amount + ", CURRENT_DATE, '" + dishes + "')");
+                n.setText(null);
+                p.setText(null);
+                amt.setText("0");
+                JOptionPane.showMessageDialog(null, "Success");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Bill cannot be generated!");
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
