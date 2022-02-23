@@ -24,7 +24,7 @@ public class Table extends javax.swing.JFrame {
     public void getEntries() {
         try {
             javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) jTable1.getModel();
-            // remove rows from jtable
+            // refresh jtable
             int rc = dtm.getRowCount();
             for (int i = 0; i < rc; i++) {
                 dtm.removeRow(0);
@@ -66,7 +66,7 @@ public class Table extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel1.setText("Table Name:");
         jLabel1.setPreferredSize(new java.awt.Dimension(84, 25));
 
@@ -163,7 +163,6 @@ public class Table extends javax.swing.JFrame {
             String n = t.getText();
             db.DbConnect.st.executeUpdate("insert into table_number values('" + n + "')");
             getEntries();
-            JOptionPane.showMessageDialog(null, "Success!");
         }
         catch (java.sql.SQLIntegrityConstraintViolationException e) {
             JOptionPane.showMessageDialog(null, "Already Exist!");
@@ -181,10 +180,12 @@ public class Table extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please select any row!");
             }
             else {
-                String n = (String) jTable1.getValueAt(rowIndex, 1);
-                db.DbConnect.st.executeUpdate("delete from table_number where table_name='" + n + "'");
-                getEntries();
-                JOptionPane.showMessageDialog(null, "Success!");
+                int result = JOptionPane.showConfirmDialog(null, "Do you really want to delete?", "Deletion Confirmation", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    String n = (String) jTable1.getValueAt(rowIndex, 1);
+                    db.DbConnect.st.executeUpdate("delete from table_number where table_name='" + n + "'");
+                    getEntries();
+                }
             }
         }
         catch (Exception e) {

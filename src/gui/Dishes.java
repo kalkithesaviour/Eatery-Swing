@@ -24,7 +24,7 @@ public class Dishes extends javax.swing.JFrame {
     public void getEntries() {
         try {
             javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) jTable1.getModel();
-            // remove rows from jtable
+            // refresh jtable
             int rc = dtm.getRowCount();
             for (int i = 0; i < rc; i++) {
                 dtm.removeRow(0);

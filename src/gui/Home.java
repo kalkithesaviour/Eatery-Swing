@@ -200,7 +200,19 @@ public class Home extends javax.swing.JFrame {
 
         jLabel7.setText("Name:");
 
+        n.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nKeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("Phone:");
+
+        p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pKeyTyped(evt);
+            }
+        });
 
         jButton3.setText("Save Bill");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -277,6 +289,8 @@ public class Home extends javax.swing.JFrame {
 
         jMenu5.setText("Operations");
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/extrafiles/search.png"))); // NOI18N
         jMenuItem6.setText("Table Order Search");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,6 +299,8 @@ public class Home extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem6);
 
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/extrafiles/dish.png"))); // NOI18N
         jMenuItem7.setText("Dishes");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,6 +309,8 @@ public class Home extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/extrafiles/table.png"))); // NOI18N
         jMenuItem8.setText("Tables");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,6 +323,7 @@ public class Home extends javax.swing.JFrame {
 
         jMenu6.setText("Settings");
 
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem9.setText("Logout");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,6 +332,7 @@ public class Home extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem9);
 
+        jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem10.setText("About App");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,6 +341,7 @@ public class Home extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem10);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem1.setText("Exit App");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -480,7 +501,7 @@ public class Home extends javax.swing.JFrame {
         try {
             String name = n.getText();
             String a = amt.getText();
-            if(!a.equals("0") && !name.equals("")) {
+            if (!a.equals("0") && !name.equals("")) {
                 String tnOfBill = (String) tables2.getSelectedItem();
                 javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) jTable1.getModel();
                 int rc = dtm.getRowCount();
@@ -510,6 +531,21 @@ public class Home extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void pKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pKeyTyped
+        // only digits allowed
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_pKeyTyped
+
+    private void nKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nKeyTyped
+        // only alphabets and spaces allowed
+        char c = evt.getKeyChar();
+        if (c != ' ' && !Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_nKeyTyped
 
     /**
      * @param args the command line arguments

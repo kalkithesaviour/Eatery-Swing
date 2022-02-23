@@ -19,6 +19,24 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
+    
+    private void login() {
+        try {
+            String id = i.getText();
+            String password = new String(p.getPassword());
+            ResultSet rs = db.DbConnect.st.executeQuery("select * from login where id='" + id + "' and password='" + password + "'");
+            if (rs.next()) {
+                new Home().setVisible(true);
+                dispose();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Invalid Entries!");
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +83,11 @@ public class Login extends javax.swing.JFrame {
         p.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         p.setForeground(new java.awt.Color(255, 0, 0));
         p.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        p.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,23 +171,14 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // login
-        try {
-            String id = i.getText();
-            String password = new String(p.getPassword());
-            ResultSet rs = db.DbConnect.st.executeQuery("select * from login where id='" + id + "' and password='" + password + "'");
-            if (rs.next()) {
-                new Home().setVisible(true);
-                dispose();
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Invalid Entries!");
-            }
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+        // login via button
+        login();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pActionPerformed
+        // login via enter key
+        login();
+    }//GEN-LAST:event_pActionPerformed
 
     /**
      * @param args the command line arguments

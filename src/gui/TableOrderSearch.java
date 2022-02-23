@@ -50,6 +50,9 @@ public class TableOrderSearch extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 nKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nKeyTyped(evt);
+            }
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -163,6 +166,14 @@ public class TableOrderSearch extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void nKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nKeyTyped
+        // only alphabets and spaces allowed
+        char c = evt.getKeyChar();
+        if (c != ' ' && !Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_nKeyTyped
 
     /**
      * @param args the command line arguments
